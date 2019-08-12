@@ -1,7 +1,7 @@
 
-#  NCan-Api-Front-end
+#  NCan-data-acquisition-platform
 
-A rest full api to detection of breast cancer developed with  [Flask](https://palletsprojects.com/p/flask/) version 1.1.1 , [Pytorch](https://pytorch.org/) version 1.2 and [scikit-learn](https://scikit-learn.org/stable/) version 0.21.3.
+A Web site to collects data to improve models of detection of breast cancer developed with  [Django](https://www.djangoproject.com/) version 2.2.2.
 
 ## Introduction
 In women, breast cancer remains the most common and deadliest cancer. Each year, there are nearly 1.38 million new cases and 458,000 deaths from breast cancer (IARC Globan, 2008). This type of cancer is widespread in both developed and developing countries. In Algeria, 12,000 new cases are registered each year.
@@ -23,7 +23,6 @@ You have to install:
 this project is implemented using MVT pattern :
 
 <img src = "mvt.png" alt = "this is image">
-
 
 
 ## UML Diagrams
