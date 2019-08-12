@@ -1,0 +1,62 @@
+.add-img-col{
+
+    text-align: center;
+}
+
+.add-img-div{
+    margin: 20px;
+    background-color: white;
+    border: solid 1px black;
+    box-shadow: 2px 2px black;
+
+    padding: 20px;
+}
+
+.end{
+    background-color: rgb(236, 239, 244);
+}
+.crad-add-mammo{
+    height:300px ;
+    min-height:550px;
+    max-height:550px;
+    margin-bottom: 50px;
+    text-align: center;
+
+
+}
+#btn-edite{
+    font-size: 18px;
+    border-radius: 0px;
+
+
+
+
+}
+.crad-add-mammo1{
+    height:300px ;
+    min-height:250px;
+    max-height:250px;
+    margin-bottom: 50px;
+    text-align: center;
+
+
+}
+#labels .row{
+    margin-bottom: 50px;
+}
+
+.add-mammo-card-btn a{
+    width: 100%;
+    text-align: center;
+}
+
+#my-awesome-dropzone{
+
+    margin-top: 50px;
+    border: dashed 1px black;
+    margin-bottom: 20px;
+}
+#div-img{
+    border-bottom: solid 1px black;
+    padding-bottom: 20px;
+}

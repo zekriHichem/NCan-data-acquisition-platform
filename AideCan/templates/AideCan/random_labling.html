@@ -1,0 +1,206 @@
+
+
+{% extends 'aideCan/base-dashboard.html' %}
+
+{% block content1 %}
+{% load static %}
+    <style>
+    canvas {
+    background: grey;
+    cursor: crosshair;
+    border: 1px solid #000000;
+    margin-left: 10px;
+}
+     .card{
+          min-height:510px;
+          max-height:520px;
+          text-align:center;
+    }
+    .random-card{
+
+        margin-top: 10px;
+        padding-top: 20px;
+        min-height:550px;
+        max-height:550px;
+
+    }
+
+#im {
+    height: 500px;
+    width: 500px;
+    object-fit: contain;
+    display: none;
+}
+
+.img_doc{
+    width: 100px;
+    text-align: center; ;
+    margin-top: 50px;
+
+    }
+.div_img{
+    text-align: center;
+}
+
+
+    </style>
+
+    <div class="container container-fluid" id="label">
+        <div class="row">
+
+
+            <div class="col-md-6 ">
+                <div id="0"  class="card random-card">
+                    <div class="card-body">
+                <canvas id="canvas" width="500" height="500"></canvas>
+                <img id="im" src="{{ mammography.mammography.url }}" alt="aa" object-fit="contain">
+                <div class="div-remote"></a> <a onclick="effacer()" class="btn btn-remote"><span class="oi oi-delete"></span></a> </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="col-md-5 col-md-offset-1 label-information">
+                               <div class="row">
+                                    <form action="{% url 'random_labling' id %}" method="post">
+                        {% csrf_token %}
+                    <div class="col-md-6 choice_col">
+                        <h1><strong>Background tissue</strong> </h1>
+                         <select name="bt" id="bt">
+                            <option value="F">Fatty</option>
+                            <option value="G">Fatty glandular</option>
+                            <option value="D">Dense glandular</option>
+
+                        </select>                    </div>
+                     <div class="col-md-6 choice_col">
+                        <h1><strong>Abnormality present</strong> </h1>
+                        <select name="ap" id="ap">
+                            <option value="CALC">Calcification</option>
+                            <option value="CIRC">Well-defined/circumscribed masses</option>
+                            <option value="SPIC">Spiculated masses</option>
+                            <option value="MISC">Other, ill-defined masses</option>
+                            <option value="ARCH">Architectural distortion</option>
+                            <option value="ASYM">Asymmetry</option>
+                            <option value="NORM">Normal</option>
+
+                        </select>
+
+
+                     </div>
+                     <div class="col-md-6 comment-col choice_col">
+                        <h1><strong>Severity of abnormality</strong> </h1>
+                       <select name="soa" id="soa">
+                            <option value="B" id="B" selected>Benign</option>
+                            <option value="M" id="M">Malignant</option>
+                            <option value="null" id="nul" class="hidden">NONE</option>
+
+
+                        </select>
+                    </div>
+                    <div class="col-md-6 comment-col">
+                        <h1><strong>Positions</strong> </h1>
+                        <input name="position" id="position" type="text" placeholder="positions ..." required readonly>
+                    </div>
+                    <div class="col-md-12 comment-col">
+                                                <p style="color:blue;">
+If the present anomaly attribute is normal then the severity field of the anomaly is deactivated</p>
+
+                        <h1><strong>Commentaire</strong> </h1>
+                        <textarea name="comment" type="" placeholder="Comment ..." required></textarea>
+                    </div>
+
+                    <div class="col-md-4 col-md-offset-4" id="btn-label-sekip-col"><input type="submit" class="btn btn-success" value="Save"></div>
+
+                                    </form>
+                               </div>
+
+
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+    <hr>
+    <div class="container" id="labels">
+        <div class="row">
+
+            {% for diag in diagnostics %}
+
+
+            <div class="col-md-4 card-bis-1">
+                <div class="card"><img src="{{ diag.mammography.mammography.url }}" class="card-img-top">
+                    <div class="card-body">
+                        <h4 class="card-title border-bottom pb-3"><strong>Label</strong> </h4>
+                        <div class="slider-div">
+
+                            <input type="checkbox" id="fruit4" name="fruit-4" checked>
+                            <label for="fruit4">{{ diag.get_background_tissue_display }}</label>
+
+                        </div>
+                          <div class="slider-div">
+
+                            <input type="checkbox" id="fruit4" name="fruit-4" checked>
+                            <label for="fruit4">{{ diag.get_abnormality_present_display }}</label>
+
+                        </div>
+                          <div class="slider-div">
+                              {% if diag.Severity_of_abnormality %}
+
+                            <input type="checkbox" id="fruit4" name="fruit-4" checked>
+                            <label for="fruit4">{{ diag.get_Severity_of_abnormality_display }}</label>
+                              {% else %}
+
+                            <input type="checkbox" id="fruit4" name="fruit-4" >
+                            <label for="fruit4">{{ diag.get_Severity_of_abnormality_display }}</label>
+                              {% endif %}
+
+                        </div>
+                        <div>
+
+                            <h4><strong>Commentaire</strong> </h4>
+                            <p class="card-text"> {{ diag.comment }} </p>
+                            <div class="card-btns">
+                                <a href="{% url 'show_label' id diag.id %}" class="btn btn-info" type="button">Read more<i class="glyphicon glyphicon-menu-right"></i></a>
+                                <a class="btn btn-danger deletbtn"  type="button" href="{% url 'sup_diagnostic' id diag.id %}">delete <i class="glyphicon glyphicon-remove"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+ {% endfor %}
+
+        </div>
+    </div>
+
+
+
+
+
+    <script src="{% static 'aideCan/assets/js/jquery.min.js' %}"></script>
+
+
+
+    <script src="{% static 'aideCan/assets/js/draw_cercle.js' %}"></script>
+
+    <script>
+    var k=0;
+
+    $('.card-text').each(function () {
+
+        var text = $(this).text();
+        var size =  text.length;
+        if (size> 70){
+            text = text.substr(0,70);
+            text +=" ....";}
+        $(this).text(text);
+
+
+    })
+
+    </script>
+    <script src="{% static  'AideCan/assets/js/labling.js' %}"></script>
+
+{% endblock %}

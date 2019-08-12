@@ -1,0 +1,183 @@
+{% extends 'aideCan/base-index.html' %}
+
+    {% block content %}
+        {% load static %}
+    <div id="first" class="container-fluid">
+        <div class="row">
+            <div class="col-md-5 col-md-offset-5" id="first-selogon">
+                <h1>TOGETHER</h1></div>
+            <div class="col-md-5 col-md-offset-5" id="first-subtitle">
+                <h1 ><strong>Let's improve breast cancer screening&nbsp;</strong> </h1></div>
+            <div class="col-md-3 col-md-offset-5 first-btn"><a class="btn btn-link btn-lg" role="button" href="#secand" id="first-more-info-btn">More informations</a></div>
+            <div class="col-md-3 first-btn"><a class="btn btn-link btn-lg animated swing" role="button" href="" data-toggle="modal" data-target="#signup"  id="first-rigester-btn"><strong>Signup</strong> </a></div>
+        </div>
+    </div>
+    <div class="container" id="secand">
+        <h1><strong>More information</strong> </h1>
+        <p>The aim of this project is twofold: the creation of a tool to assist in the diagnosis of breast cancer and the development of a platform for data acquisition and the construction of a data-set. </p>
+        <hr>
+        <div class="row">
+            <div class="col-md-4 service" data-aos="fade-up"><i class="glyphicon glyphicon-heart secand-icon"></i>
+                <h1>Your support </h1>
+                <p class="secand-p">
+Your help consists of the contribution with information on the cases to help eliminate breast cancer.&nbsp; </p>
+            </div>
+            <div class="col-md-4 service" data-aos="fade-down"><i class="glyphicon glyphicon-wrench secand-icon"></i>
+
+
+                <h1>Our work </h1>
+                <p class="secand-p">After collecting the data/parameters introduced by our contributors, our job consists of first, training computers to work on this data to detect cancer.&nbsp; </p>
+            </div>
+            <div class="col-md-4 service" data-aos="fade-up"><i class="glyphicon glyphicon-thumbs-up secand-icon"></i>
+                <h1>A better life&nbsp; </h1>
+                <p class="secand-p">
+After all, know that breast cancer will be easier and more effective to eradicate, and thus, thousands of lives will be saved.&nbsp; </p>
+            </div>
+        </div>
+    </div>
+    <div id="therd" class="container-fluid">
+        <h1>Our doctor</h1>
+        <div class="row">
+            <div class="col-md-3 card-bis" data-aos="flip-left"><img src="{% static 'aideCan/assets/img/docteur-medecin (1).jpg' %}" class="card-img">
+                <hr>
+                <h3 class="card-h2">Zekri Hicham</h3>
+                <p class="card-p">un medcin specialiste en medécine interne chez hopitale de sidi bel abes &nbsp; </p>
+            </div>
+            <div class="col-md-3 card-bis" data-aos="flip-left"><img src="{% static 'aideCan/assets/img/ZINEB.jpg' %}" class="card-img">
+                <hr>
+                <h3 class="card-h2">Cherki Zineb</h3>
+                <p class="card-p">un medcin specialiste en radiographie chez hopitale de Tlemcen&nbsp; </p>
+            </div>
+
+        </div>
+    </div>
+
+
+<div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-labelledby="signupTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="signupTitle">Create account</h2>
+                <button type="button" id="signup-btn-close" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+     <form action="{% url 'first_page' %}" method="post">
+            {% csrf_token %}
+            <div class="modal-body">
+
+
+                {% for field in form %}
+                  <p>
+                    {{ field }}
+                    {% if field.help_text %}
+                      <br>
+                        <small style="color: grey" >{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                      <p style="color: red" class="error_signup">{{ error }}</p>
+                    {% endfor %}
+
+                 {% endfor %}
+              {% for field in form2 %}
+
+                    {{ field }}
+                    {% if field.help_text %}
+                      <br>
+                        <small style="color: grey" >{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                      <p style="color: red" class="error_signup">{{ error }}</p>
+                    {% endfor %}
+                  </p>
+                 {% endfor %}
+
+                    <span class="psw"><a href="#" onclick="clicksignuptosignin()" data-toggle="modal" data-target="#signin">Already have an account ?</a> </span>
+
+
+
+
+
+            </div>
+            <div class="modal-footer">
+
+                <a type="button" class="btn btn-danger" data-dismiss="modal">Close</a>
+                <button type="submit" class="btn btn-primary">Signup</button>
+            </div>
+          </form>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="signin" tabindex="-1" role="dialog" aria-labelledby="signinTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="signinTitle">Login to your account</h2>
+                <button type="button" id="signin-btn-close" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+ <form  action="{% url 'first_page' %}" method="post">
+    {% csrf_token %}
+ {% load widget_tweaks %}
+            <div class="modal-body">
+
+                 <p>
+                        {% render_field form1.username placeholder="User name" %}
+
+                    {% for error in field.errors %}
+
+                      <p style="color: red">{{ error }}</p>
+                    {% endfor %}
+                  </p>
+
+             <p>
+                        {% render_field form1.password placeholder="password" %}
+
+
+                    {% for error in field.errors %}
+
+                      <p style="color: red">{{ error }}</p>
+                    {% endfor %}
+                  </p>
+                    <span class="psw"><a href="#" onclick="clicksignintosignup()" data-toggle="modal" data-target="#signup">You don't have an account ?</a> | <a href="{% url 'password_reset' %}">Forgot your password?</a></span>
+            </div>
+            <div class="modal-footer">
+
+                <a type="button" class="btn btn-danger" data-dismiss="modal">Close</a>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+           </form>
+        {% if error_login %}
+           <p id="error"></p>
+        {% endif %}
+
+        </div>
+    </div>
+</div>
+ <script src="{% static 'aideCan/assets/js/jquery.min.js' %}"></script>
+        <script>
+
+           var v = document.getElementById('error');
+           if (v != null){
+               alert('{{ error_login }}');
+                $('.error_signup').hide();
+
+           }
+
+           function clicksignuptosignin() {
+
+
+        $('#signup-btn-close').click();
+
+    }
+    function clicksignintosignup() {
+        $('#signin-btn-close').click();
+
+
+    }
+
+</script>
+
+  {% endblock %}

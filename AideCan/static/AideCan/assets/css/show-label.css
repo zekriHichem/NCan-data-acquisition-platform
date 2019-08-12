@@ -1,0 +1,80 @@
+.label-information h1{
+  border-bottom:solid 1px;
+  font-size: 18px;
+}
+
+.show-label-range{
+  margin-top:20px;
+}
+
+img.show-label-card-img-top{
+  border-radius:100%;
+  width:100px;
+  text-align:center;
+  margin-top:50px;
+}
+
+div.card-show-label.card{
+  max-height:440px;
+  min-height:440px;
+}
+
+div#label.container{
+  border-bottom:solid 1px black;
+}
+
+div.col-md-12.comment-col{
+  margin-top:20px;
+}
+
+.comment-col input{
+  width:100%;
+  width:100%;
+  height:50px;
+  padding:20px;
+}
+.comment-col textarea{
+  width:100%;
+  height:150px;
+  padding:20px;
+}
+
+button.btn.btn-info.btn-lg.btn-add{
+  margin-top:20px;
+  margin-bottom:20px;
+  border-radius:0px;
+}
+
+
+.choice_col select{
+  width:100%;
+  height:50px;
+}
+img#add-img{
+  width:100%;
+  height: 100%;
+}
+
+#add-mammo-btn{
+  margin-top:20px;
+  border-radius:20px;
+  padding:20px;
+}
+
+#end{
+  background-color:rgb(242,244,247);
+}
+
+.div-rate{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.dr_name{
+  border-bottom: solid 1px black;
+  padding-bottom: 20px;
+}
+
+.img_doc{
+
+  width: 100PX;
+}

@@ -1,0 +1,57 @@
+{% extends 'aideCan/base-dashboard.html' %}
+
+    {% block content1 %}
+            {% load static %}
+
+    <div class="container container-fluid" id="label">
+        <div class="row">
+            <form action="{% url 'add_mammography' id %}" method="post"    class="dropzone" id="my-awesome-dropzone" enctype="multipart/form-data">
+                {% csrf_token %}
+
+
+            </form>
+
+        </div>
+    </div>
+    <hr>
+    <div class="container" id="labels">
+        <div class="row">
+            {% for m in mammographies %}
+
+               <div class="col-md-3 card-bis-1">
+                <div class="card crad-add-mammo1">
+
+                    <img src="{{ m.mammography.url }}" class="card-img-top">
+                    <div class="card-body">
+                        <div class="add-mammo-card-btn">
+                                <a href="{% url 'label_one' id m.id %}" class="btn btn-info" type="button">Labeling<i class="glyphicon glyphicon-menu-right"></i></a>
+                                <a class="btn btn-danger deletbtn" type="button" href="{% url 'sup_mammography' id m.id %}">Delete <i class="glyphicon glyphicon-remove"></i></a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="col-md-3 " id="end">
+                <div class="card crad-add-mammo end">
+
+                    <div class="card-body">
+                        <img src="{% static 'AideCan/assets/img/add-image.png' %}"  id="add-img">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+        <script src="{% static 'aideCan/assets/js/jquery.min.js' %}"></script>
+
+
+
+{% endblock %}

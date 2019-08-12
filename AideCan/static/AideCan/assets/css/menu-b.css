@@ -1,0 +1,31 @@
+#menu-b{
+  margin-top:40px;
+  background-color:#00649d;
+  position:fixed;
+  width:100%;
+  z-index:1;
+}
+
+img#logo{
+  height:80px;
+}
+
+.menu-b-item{
+  text-align:center;
+  color:white;
+}
+
+.menu-b-item p{
+  margin-top:35px;
+  color: white;
+}
+
+.p:hover{
+
+  background-color: #2aabd2;
+  border-bottom:solid 2px white;
+}
+
+html {
+  scroll-behavior: smooth;
+}

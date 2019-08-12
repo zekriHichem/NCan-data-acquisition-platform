@@ -1,0 +1,92 @@
+.card-bis{
+  text-align:center;
+  background-color:white;
+  margin:40px;
+  width:240px;
+  box-shadow:0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.card-img{
+  width:150px;
+  border-radius:100%;
+  margin-top:20px;
+}
+
+#therd{
+  background-color:rgb(231,228,228);
+  text-align:center;
+}
+
+.card-h2{
+  color:rgb(1,228,1);
+}
+
+.card-p{
+  font-size:14px;
+  color:gray;
+}
+
+.card:hover{
+  box-shadow:0 20px 28px 0 rgba(0,0,0,0.2);
+}
+
+#therd h1{
+  margin-top:100px;
+}
+
+footer{
+  text-align:center;
+  background-color:rgb(68,68,111);
+}
+
+img#footer-logo{
+  width:150px;
+}
+
+p#footer-copy{
+  margin-top:50px;
+  color:white;
+}
+
+div#footer-contact.col-md-4{
+  text-align:left;
+}
+
+.footer-contacts p{
+  display:inline-block;
+}
+
+.footer-contacts-icon{
+  font-size:40px;
+  margin-top:20px;
+  color:white;
+}
+
+.footer-contact-p-col{
+  margin-top:25px;
+  color:white;
+  text-align:left;
+  font-size:18px;
+}
+
+.footer-contacts .row{
+  margin-top:20px;
+}
+
+#about{
+  color:white;
+}
+
+#about-p{
+  color:rgb(232,225,225);
+}
+
+p#about-icon{
+  text-align:right;
+}
+
+p#about-icon i{
+  margin:20px;
+  font-size:24px;
+}
+

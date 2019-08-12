@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aide Can</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'aideCan/assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+    <link rel="stylesheet" href="{% static 'aideCan/assets/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'aideCan/assets/css/menu-top.css' %}">
+    <link rel="stylesheet" href="{% static 'aideCan/assets/css/menu-b.css' %}">
+    <link rel="stylesheet" href="{% static 'aideCan/assets/css/first.css' %}">
+    <link rel="stylesheet" href="{% static 'aideCan/assets/css/mobile-menus.css' %}">
+    <link rel="stylesheet" href="{% static 'aideCan/assets/css/secand.css' %}">
+    <link rel="stylesheet" href="{% static 'aideCan/assets/css/therd.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="{% static 'aideCan/assets/css/lebel.css' %}">
+    <link rel="stylesheet" href="{% static 'aideCan/assets/css/show-label.css' %}">
+    <link rel="stylesheet" href="{% static 'aideCan/assets/css/menu-top-dashboard.css' %}">
+    <style>
+        #user-space-btn{
+  border:solid 1px #000000;
+  color:black;
+  font-size:20px;
+  border-radius:0px;
+  margin-top:5px ;
+  margin-bottom: 5px;
+}
+    </style>
+</head>
+<body>
+<div id="menu-top" class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 menu-top-item">
+                <p><i class="glyphicon glyphicon-earphone"></i> +213 656 055 748</p>
+            </div>
+
+            {% if user.is_authenticated %}
+             <div class="col-md-2 col-md-offset-8 menu-top-item">
+                      <a class="btn btn-link btn-lg animated swing" href="{% url 'random_labling' user.id %}" id="user-space-btn" style="color: black"><strong>User Space</strong> </a></div>
+
+            </div>
+
+            {% else %}
+              <div class="col-md-2 col-md-offset-6 menu-top-item" id="login">
+                <a  href=""  data-toggle="modal" data-target="#signin"> <p>Signin</p></a>
+            </div>
+            <div class="col-md-2 menu-top-item" id="rigestring">
+               <a href="" data-toggle="modal" data-target="#signup" > <p><strong>Signup</strong> </p></a>
+            </div>
+
+            {% endif %}
+        </div>
+    </div>
+<div class="container-fluid">
+        <div class="row" id="menu-b">
+            <div class="col-md-12" id="burger-col"><i class="glyphicon glyphicon-menu-hamburger" id="burger"></i></div>
+            <div class="col-md-3 menu-b-item" style="text-align: left"><img src="{% static 'aideCan/assets/img/logo_v02.png' %}" id="logo"><span style="font-family: Gabriola;font-size: 20px"> To help cancer patients</span></div>
+            <div class="col-md-3 menu-b-item p">
+              <a href="#secand">  <p><strong>More informations</strong></p></a>
+            </div>
+            <div class="col-md-3 menu-b-item p">
+               <a href="#therd"><p><strong>About us</strong></p></a>
+            </div>
+            <div class="col-md-3 menu-b-item p">
+                <a href="{% url 'tel' %}"><p><strong>Data-set</strong> </p></a>
+            </div>
+            {% if user.is_authenticated %}
+
+            {% else %}
+              <div class="col-md-3 menu-b-item" id="login-b">
+                <a  data-toggle="modal" data-target="#signin"><p><strong>Signin</strong></p></a>
+            </div>
+            <div class="col-md-3 menu-b-item" id="rigestration-b">
+               <a data-toggle="modal" data-target="#signup" > <p><strong>Signup</strong> </p></a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+{% block content %}
+
+{% endblock %}
+
+
+
+
+ <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4"><img src="{% static 'aideCan/assets/img/logo.png' %}" id="footer-logo">
+                    <p id="footer-copy">TEC CAN © 2019&nbsp; </p>
+                </div>
+                <div class="col-md-4 col-sm-6 footer-contacts">
+                    <div class="row">
+                        <div class="col-md-6"><i class="fa fa-map-marker footer-contacts-icon"></i></div>
+                        <div class="col-md-6 footer-contact-p-col">
+                            <p><strong>Sidi Djilali</strong></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6"><i class="glyphicon glyphicon-phone-alt footer-contacts-icon"></i></div>
+                        <div class="col-md-6 footer-contact-p-col">
+                            <p>+213 656 055 748</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6"><i class="fa fa-google footer-contacts-icon"></i></div>
+                        <div class="col-md-6 footer-contact-p-col">
+                            <p>anticancerdusein@gmail.com </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" id="about">
+                    <h1><strong><span style="text-decoration: underline;">About us</span></strong></h1>
+                    <p id="about-p">TEC CAN is an innovative company specializing in the development of solutions for decision support in the medical field.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </p>
+                    <p id="about-icon"> <i class="fa fa-github"></i><i class="fa fa-linkedin-square"></i><i class="fa fa-twitter"></i><i class="fa fa-facebook"></i></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+ <script src="{% static 'aideCan/assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'aideCan/assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="{% static 'aideCan/assets/js/init-aos.js' %}"></script>
+    <script src="{% static 'aideCan/assets/js/menu.js' %}"></script>
+<script>
+    function clicksignuptosignin() {
+
+
+        $('#signup-btn-close').click();
+
+    }
+    function clicksignintosignup() {
+        $('#signin-btn-close').click();
+
+
+    }
+
+
+</script>
+</body>
+</html>

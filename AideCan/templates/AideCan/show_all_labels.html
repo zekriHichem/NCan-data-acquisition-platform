@@ -1,0 +1,98 @@
+
+
+{% extends 'aideCan/base-dashboard.html' %}
+
+{% block content1 %}
+{% load static %}
+    <style>
+    #label{
+        margin-top:140px ;
+    }
+    #navbar{
+        margin-top:-140px;
+    }
+
+    .card{
+        min-height: 510px;
+          max-height:520px;
+          text-align:center;
+    }
+
+    </style>
+    <div class="container" id="label">
+        <div class="row">
+
+            {% for diag in diagnostics %}
+
+
+            <div class="col-md-4 card-bis-1">
+                <div class="card"><img src="{{ diag.mammography.mammography.url }}" class="card-img-top">
+                    <div class="card-body">
+                        <h4 class="card-title border-bottom pb-3"><strong>label</strong> </h4>
+                        <div class="slider-div">
+
+                            <input type="checkbox" id="fruit4" name="fruit-4" checked>
+                            <label for="fruit4">{{ diag.get_background_tissue_display }}</label>
+
+                        </div>
+                          <div class="slider-div">
+
+                            <input type="checkbox" id="fruit4" name="fruit-4" checked>
+                            <label for="fruit4">{{ diag.get_abnormality_present_display }}</label>
+
+                        </div>
+                          <div class="slider-div">
+
+                          {% if diag.Severity_of_abnormality %}
+
+                            <input type="checkbox" id="fruit4" name="fruit-4" checked>
+                            <label for="fruit4">{{ diag.get_Severity_of_abnormality_display }}</label>
+                              {% else %}
+
+                            <input type="checkbox" id="fruit4" name="fruit-4" >
+                            <label for="fruit4">{{ diag.get_Severity_of_abnormality_display }}</label>
+                              {% endif %}
+
+                        </div>
+                        <div>
+                            <h4><strong>Comment</strong> </h4>
+                            <p class="card-text"> {{ diag.comment }} </p>
+                            <div class="card-btns">
+                                <a href="{% url 'show_label' id diag.id %}" class="btn btn-info" type="button">Read more<i class="glyphicon glyphicon-menu-right"></i></a>
+                                <a class="btn btn-danger deletbtn"   type="button" href="{% url 'sup_diagnostic' id diag.id %}">Delete <i class="glyphicon glyphicon-remove"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+ {% endfor %}
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <script src="{% static 'aideCan/assets/js/jquery.min.js' %}"></script>
+    <script>
+    var k=0;
+
+    $('.card-text').each(function () {
+
+        var text = $(this).text();
+        var size =  text.length;
+        if (size> 70){
+            text = text.substr(0,70);
+            text +=" ....";}
+        $(this).text(text);
+
+
+    })
+
+    </script>
+
+
+{% endblock %}

@@ -1,0 +1,32 @@
+.service{
+  text-align:center;
+}
+
+.secand-icon{
+  font-size:50px;
+}
+
+#secand .row{
+  margin-top:100px;
+}
+
+p.secand-p{
+  font-size:18px;
+}
+
+div#secand.container{
+  text-align:center;
+}
+
+#secand p{
+  font-size:24px;
+}
+
+#secand h1{
+  font-size:36px;
+}
+
+#secand{
+  margin-bottom:50px;
+}
+

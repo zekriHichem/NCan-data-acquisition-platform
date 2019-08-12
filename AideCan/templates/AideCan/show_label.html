@@ -1,0 +1,323 @@
+
+
+{% extends 'aideCan/base-dashboard.html' %}
+
+{% block content1 %}
+{% load static %}
+    <style>
+    canvas {
+    background: grey;
+    cursor: crosshair;
+    border: 1px solid #000000;
+    margin-left: 10px;
+}
+
+#im {
+    height: 500px;
+    width: 500px;
+    object-fit: contain;
+    display: none;
+}
+
+.img_doc{
+    width: 100px;
+    text-align: center; ;
+    margin-top: 50px;
+
+    }
+.div_img{
+    text-align: center;
+}
+
+
+    </style>
+
+    <div class="container container-fluid" id="label">
+        <div class="row">
+            <form action="{% url 'show_label' id id_label %}" method="post" >
+                            {% csrf_token %}
+
+            <div class="col-md-5 ">
+                <canvas id="canvas" width="500" height="500"></canvas>
+                <img id="im" src="{{ diagnostic.mammography.mammography.url }}" alt="aa" object-fit="contain">
+                <div class="div-remote" style="display: none">
+
+                    </a> <a onclick="effacer()" class="btn btn-remote"><span class="oi oi-delete"></span></a>
+                </div>
+            </div>
+            <div class="col-md-5 col-md-offset-1 label-information">
+                                <div class="row">
+                    <div class="col-md-6 choice_col">
+                        <h1><strong>Background tissue</strong> </h1>
+                         <select name="bt" disabled class="dis" id="bt">
+                            <option value="F" >Fatty</option>
+                            <option value="G" >Fatty glandular</option>
+                            <option value="D">Dense glandular</option>
+
+
+                        </select>                    </div>
+                     <div class="col-md-6 choice_col">
+                        <h1><strong>Abnormality present</strong> </h1>
+                        <select name="ap" disabled class="dis" id="ap">
+                            <option value="CALC" >Calcification</option>
+                            <option value="CIRC">Well-defined/circumscribed masses</option>
+                            <option value="SPIC">Spiculated masses</option>
+                            <option value="MISC">Other, ill-defined masses</option>
+                            <option value="ARCH">Architectural distortion</option>
+                            <option value="ASYM">Asymmetry</option>
+                            <option value="NORM">Normal</option>
+
+
+                        </select>
+
+
+                     </div>
+                     <div class="col-md-6 comment-col choice_col">
+                        <h1><strong>Severity of abnormality</strong> </h1>
+                       <select name="soa" disabled class="dis" id="soa">
+                            <option value="B" id="B">Benign</option>
+                            <option value="M" id="M">Malignant</option>
+                            <option value="null" id="nul" hidden>NONE</option>
+
+                        </select>
+                    </div>
+                    <div class="col-md-6 comment-col">
+                        <h1><strong>Positions</strong> </h1>
+                        <input name="position" id="position" type="text" placeholder="positions ..." value="{{ diagnostic.Cercle }}" required readonly>
+                    </div>
+                    <div class="col-md-12 comment-col">
+                      <p style="color:blue;">
+If the present anomaly attribute is normal then the severity field of the anomaly is deactivated</p>
+
+                        <h1><strong>Comment</strong> </h1>
+                        <textarea name="comment" id="comment" type="" placeholder="Comment ..."  readonly>{{ diagnostic.comment }}</textarea>
+                    </div>
+
+                    <div class="col-md-4 col-md-offset-4" id="btn-label-sekip-col">
+
+        {% if diagnostic.user.id != id %}
+        <a class="btn btn-success" href="#" id="btn-edite"  onclick="modifier()">Edit</a>
+        <input type="submit" class="btn btn-success" id="save-btn" style="display: none;" value="Valider"></div>
+    {% endif %}
+
+                    </div>
+                </div>
+            </form>
+            </div>
+
+        </div>
+    </div>
+    <hr>
+    <div class="container" id="labels">
+        <div class="row">
+            {% for diag in diagnostics %}
+      <div class="col-md-4 card-bis-1">
+                <div class="card crad-add-mammo">
+
+                   <div class="div_img" style="text-align: center">
+                       <p style="text-align: center"><img src="{{ diag.user.photo.url }}" class="img_doc" >
+                   </p>
+
+                   </div>
+                    <h3 class="dr_name">Dr.{{ diag.user.user.first_name }}</h3>
+                    <div class="card-body">
+                        <div class="add-mammo-card-btn">
+                            <h2>label</h2>
+                        <div class="slider-div">
+
+                            <input type="checkbox" id="fruit4" name="fruit-4" checked>
+                            <label for="fruit4">{{ diag.get_background_tissue_display }}</label>
+
+                        </div>
+                          <div class="slider-div">
+
+                            <input type="checkbox" id="fruit4" name="fruit-4" checked>
+                            <label for="fruit4">{{ diag.get_abnormality_present_display }}</label>
+
+                        </div>
+                          <div class="slider-div">
+
+                           {% if diag.Severity_of_abnormality %}
+
+                            <input type="checkbox" id="fruit4" name="fruit-4" checked>
+                            <label for="fruit4">{{ diag.get_Severity_of_abnormality_display }}</label>
+                              {% else %}
+
+                            <input type="checkbox" id="fruit4" name="fruit-4" >
+                            <label for="fruit4">{{ diag.get_Severity_of_abnormality_display }}</label>
+                              {% endif %}
+
+                        </div>
+
+
+                            <h2>Comment</h2>
+                            <p class="card-text"> {{ diag.comment }}</p>
+
+
+                                <a href="{% url 'show_label' id diag.id %}" class="btn btn-info btn-block" style="width: 100%" type="button">Read More<i class="glyphicon glyphicon-menu-right"></i></a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="col-md-4">
+                <div id="end" class="card card-show-label">
+                    <div class="card-body"></div><img src="{% static 'aideCan/assets/img/add.png' %}"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script src="{% static 'aideCan/assets/js/jquery.min.js' %}"></script>
+
+
+    <script>
+        //Canvas
+
+
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        //Variables
+        var canvasx = $(canvas).offset().left;
+        var canvasy = $(canvas).offset().top;
+        var last_mousex = last_mousey = 0;
+        var mousex = mousey = 0;
+        var mousedown = false;
+
+        var ax = ay = bx = by = 0;
+        var zones = [];
+
+        var image = document.getElementById("im");
+
+        function drawImageScaled(img, ctx) {
+           var hRatio = canvas.width  / img.width    ;
+           var vRatio =  canvas.height / img.height  ;
+           var ratio  = Math.min ( hRatio, vRatio );
+           var centerShift_x = ( canvas.width - img.width*ratio ) / 2;
+           var centerShift_y = ( canvas.height - img.height*ratio ) / 2;
+           ctx.clearRect(0,0,canvas.width, canvas.height);
+           ctx.drawImage(img, 0,0, img.width, img.height,
+                              centerShift_x,centerShift_y,img.width*ratio, img.height*ratio);
+        }
+
+        drawImageScaled(image, ctx);
+        document.onload = function(){drawImageScaled(image, ctx);};
+
+
+
+
+
+        function effacer() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            drawImageScaled(image, ctx);
+            zones = [];
+            $('#position').attr('value',zones);
+
+        }
+
+
+        function refreshCanvas() {
+            canvasx = $(canvas).offset().left;
+            canvasy = $(canvas).offset().top;
+        }
+
+
+
+        function modifier(){
+    //Mousedown
+    $(canvas).on('mousedown', function(e) {
+        last_mousex = parseInt(e.pageX-canvasx);
+        last_mousey = parseInt(e.pageY-canvasy);
+        mousedown = true;
+        ax = e.pageX-canvasx;
+        ay = e.pageY-canvasy;
+    });
+
+    //Mouseup
+    $(canvas).on('mouseup', function(e) {
+        refreshCanvas();
+        bx = e.pageX-canvasx;
+        by = e.pageY-canvasy;
+
+        mousedown = false;
+    });
+
+    //Mousemove
+    $(canvas).on('mousemove', function(e) {
+        refreshCanvas();
+        mousex = parseInt(e.pageX-canvasx);
+        mousey = parseInt(e.pageY-canvasy);
+        if(mousedown) {
+            ctx.clearRect(0,0,canvas.width,canvas.height); //clear canvas
+            ctx.beginPath();
+            var width = mousex-last_mousex;
+            var height = mousey-last_mousey;
+            drawImageScaled(image, ctx);
+            zones=[last_mousex,last_mousey,Math.sqrt(Math.pow(mousex-last_mousex,2)+Math.pow(mousey-last_mousey,2))];
+            ctx.arc(last_mousex,last_mousey, Math.sqrt(Math.pow(mousex-last_mousex,2)+Math.pow(mousey-last_mousey,2)),0,2*Math.PI);
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+        //Output
+        $('#position').attr('value',zones);
+
+
+        });
+
+
+        $('.div-remote').css('display','block');
+        $('#btn-edite').hide();
+        $('#save-btn').css('display','block');
+        $('.dis').removeAttr('disabled');
+        $('#comment').removeAttr('readonly');
+
+
+
+
+
+        }
+
+    </script>
+    <script>
+    var k=0;
+
+    $('.card-text').each(function () {
+
+        var text = $(this).text();
+        var size =  text.length;
+        if (size> 70){
+            text = text.substr(0,70);
+            text +=" ....";}
+        $(this).text(text);
+
+
+    })
+
+    </script>
+
+    <script>
+
+    var bt = "{{ diagnostic.background_tissue }}";
+    var ap = "{{ diagnostic.abnormality_present }}";
+    var soa = "{{ diagnostic.Severity_of_abnormality }}";
+    console.log("hhhhhh");
+    console.log(soa);
+
+    $('#bt').val(bt);
+    $('#ap').val(ap);
+    $('#soa').val(soa);
+
+
+
+
+
+
+
+    </script>
+    <script src="{% static 'AideCan/assets/js/labling.js' %}"></script>
+{% endblock %}

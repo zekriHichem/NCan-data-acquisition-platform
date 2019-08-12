@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aide Can</title>
+      {% load static %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static 'aideCan/assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+    <link rel="stylesheet" href="{% static 'aideCan/assets/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'aideCan/assets/css/first.css' %}">
+    <link rel="stylesheet" href="{% static 'aideCan/assets/css/secand.css' %}">
+    <link rel="stylesheet" href="{% static 'aideCan/assets/css/therd.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="{% static 'aideCan/assets/css/lebel.css' %}">
+    <link rel="stylesheet" href="{% static 'aideCan/assets/css/show-label.css' %}">
+    <link rel="stylesheet" href="{% static 'aideCan/assets/css/add-file.css' %}">
+    <link rel="stylesheet" href="{% static 'aideCan/assets/css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'aideCan/assets/css/add-mammo.css' %}">
+    <link rel="stylesheet" href="{% static 'aideCan/assets/css/dropzone.css' %}">
+     <link rel="stylesheet" href="{% static 'aideCan/assets/css/menu-d.css' %}">
+     <link rel="stylesheet" href="{% static 'aideCan/assets/css/checkbox.css' %}">
+
+
+
+
+
+
+</head>
+<body id="body1">
+        <div id="navbar" class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 menu-b-item" style="text-align: left"><img src="{% static 'aideCan/assets/img/logo_v02.png' %}" id="logo"><span style="font-family: Gabriola;font-size: 20px;color: white"> To help cancer patients</span></div>
+            <div class="col-xs-9" id="col-burger-d">
+                <a onclick="" id="ham" ><i class="glyphicon glyphicon-menu-hamburger" ></i> </a>
+            </div>
+            <div class="col-md-2 nav-item">
+                <a href="{% url 'random_labling' id %}"><p class="nav-item-text"><strong>Random labeling</strong></p></a>
+            </div>
+            <div class="col-md-2 nav-item">
+               <a href="{% url 'add_mammography' id %}"> <p class="nav-item-text"><strong>add mammography</strong></p></a>
+            </div>
+            <div class="col-md-2 nav-item">
+               <a href="{% url 'show_all_labels' id %}"> <p class="nav-item-text"><strong>All Labels</strong></p></a>
+            </div>
+             <div class="col-md-2 nav-item">
+               <a href="{% url 'statistic' id %}" > <p class="nav-item-text"><strong>Statistics</strong></p></a>
+            </div>
+            <div class="col-md-1 nav-item">
+                <p class="nav-item-text"><strong>DATA-SET</strong> </p>
+            </div>
+            <div class="col-md-1 nav-item">
+                <div class="dropdown">
+                    <img src="{{ doc.photo.url }}" id="user-img-d-menu" class = "dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span>
+                    <ul class="dropdown-menu" role="menu">
+                        <li role="presentation"><a href="{% url 'profile' id %}">Profile</a></li>
+                        <li role="presentation"><a href="{% url 'first_page' %}">Home</a></li>
+                        <li role="presentation"><a href="{% url 'logout' %}">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+
+    </div>
+    </div>
+
+
+
+    {% block content1 %}
+    {% endblock %}
+
+
+    <script src="{% static 'aideCan/assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'aideCan/assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="{% static 'aideCan/assets/js/init-aos.js' %}"></script>
+    <script src="{% static 'aideCan/assets/js/show-more.js' %}"></script>
+    <script src="{% static 'aideCan/assets/js/dropzone.js' %}"></script>
+    <script>
+
+
+        var i =0;
+        console.log("hello")
+        $('#col-burger-d').on('click',function () {
+            console.log("world")
+            i++;
+
+            if (i % 2 == 0){
+                $('.nav-item').css("display","none");
+            }else {
+                $('.nav-item').css("display","block");
+
+            }
+
+
+        })
+
+
+
+        $(window).resize(function(){
+
+            if ($(window).width() > 991) {
+                $('.nav-item').css("display","block");
+
+                i=0;
+            }
+
+            if ((i == 0)  && ($(window).width() < 991)){
+                $('.nav-item').css("display","none");
+            }
+
+
+        });
+
+
+
+    </script>
+<script src="{% static "AideCan/assets/js/delete.js" %}"></script>
+
+
+</body>
+</html>

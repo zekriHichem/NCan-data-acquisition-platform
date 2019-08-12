@@ -1,0 +1,183 @@
+
+
+{% extends 'aideCan/base-dashboard.html' %}
+
+{% block content1 %}
+{% load static %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" >
+
+    <style>
+
+    .charts{
+        margin-left: 50px;
+        border: solid 2px rgba(255,99,132,1);
+    }
+    </style>
+
+    <div class="container container-fluid" id="label">
+       <div class="row">
+        <div class="col-md-5 charts">
+
+<canvas id="oilChart01" width="600" height="400"></canvas>
+<h1 class="text-center" style="border-top:solid 1px rgba(255,99,132,1) ">Background tissue</h1>
+
+        </div>
+        <div class="col-md-5 charts" >
+  <canvas id="oilChart02" width="600" height="400"></canvas>
+                        <h1 class="text-center" style="border-top:solid 1px rgba(255,99,132,1) ">Severity of abnormality</h1>
+        </div>
+
+    </div>
+       <div class="row">
+        <div class="col-md-12" style="margin-top: 20px">
+        <div class="chart-container">
+            <canvas id="chart" height="400"></canvas>
+        </div>
+        </div>
+
+
+    </div>
+
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css"></script>
+    <script>
+    var oilCanvas = document.getElementById("oilChart00");
+
+  Chart.defaults.global.defaultFontFamily = "Lato";
+  Chart.defaults.global.defaultFontSize = 18;
+
+  var oilData = {
+    labels: [
+      "CALC",
+      "CIRC",
+      "SPIC",
+      "MISC",
+      "ARCH",
+        "ASYM",
+        "NORM"
+    ],
+    datasets: [
+      {
+        data: [100, 50, 50, 50, 50,20,30],
+        backgroundColor: [
+          "#FF6384",
+          "#63FF84",
+          "#ffed73",
+          "#8463FF",
+          "#f1d2ff",
+          "#8BFFF8",
+          "#ffd424",
+        ]
+      }]
+  };
+
+  var pieChart = new Chart(oilCanvas, {
+    type: 'pie',
+    data: oilData
+  });
+    </script>
+    <script>
+    var oilCanvas = document.getElementById("oilChart01");
+
+  Chart.defaults.global.defaultFontFamily = "Lato";
+  Chart.defaults.global.defaultFontSize = 18;
+
+  var oilData = {
+    labels: [
+      "Fatty",
+      "Fatty glandular",
+      "Dense glandular"
+    ],
+    datasets: [
+      {
+        data: [200, 100, 60],
+        backgroundColor: [
+          "#FF6384",
+          "#63FF84",
+          "#6384FF"
+        ]
+      }]
+  };
+
+  var pieChart = new Chart(oilCanvas, {
+    type: 'pie',
+    data: oilData
+  });
+    </script>
+    <script>
+    var oilCanvas = document.getElementById("oilChart02");
+
+  Chart.defaults.global.defaultFontFamily = "Lato";
+  Chart.defaults.global.defaultFontSize = 18;
+
+  var oilData = {
+    labels: [
+      "Benign",
+      "Malignant",
+        'None'
+    ],
+    datasets: [
+      {
+        data: [200, 120, 40],
+        backgroundColor: [
+          "#FF6384",
+          "#63FF84",
+          "#8463FF"
+        ]
+      }]
+  };
+
+  var pieChart = new Chart(oilCanvas, {
+    type: 'pie',
+    data: oilData
+  });
+    </script>
+    <script>
+    var data = {
+  labels: ["CALC",
+      "CIRC",
+      "SPIC",
+      "MISC",
+      "ARCH",
+        "ASYM",
+        "NORM"],
+  datasets: [{
+    label: "Abnormality present",
+    backgroundColor: "rgba(255,99,132,0.2)",
+    borderColor: "rgba(255,99,132,1)",
+    borderWidth: 2,
+    hoverBackgroundColor: "rgba(255,99,132,0.4)",
+    hoverBorderColor: "rgba(255,99,132,1)",
+    data: [65, 59, 20, 81, 56, 55, 40],
+  }]
+};
+
+var options = {
+  maintainAspectRatio: false,
+  scales: {
+    yAxes: [{
+      stacked: true,
+      gridLines: {
+        display: true,
+        color: "rgba(255,99,132,0.2)"
+      }
+    }],
+    xAxes: [{
+      gridLines: {
+        display: false
+      }
+    }]
+  }
+};
+
+Chart.Bar('chart', {
+  options: options,
+  data: data
+});
+
+    </script>
+
+{% endblock %}

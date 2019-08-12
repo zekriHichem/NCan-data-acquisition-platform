@@ -1,0 +1,42 @@
+.menu-top-item{
+  text-align:center;
+}
+
+#login{
+  background-color:rgb(225,66,75);
+  color:white;
+  font-size:15px;
+}
+
+#rigestring{
+  color:white;
+  background-color:rgb(0,128,0);
+  font-size:15px;
+}
+#menu-top a{
+  color:white;
+
+}
+.dropdown{
+  color: black;
+}
+.caret{
+  color: black;
+}
+.dropdown-item{
+  color: black;
+}
+.dropdown-menu li {
+  color: black;
+}
+#menu-top{
+  background-color:rgb(238,237,237);
+  position:fixed;
+  width:100%;
+  z-index:9999;
+}
+
+.menu-top-item p{
+  margin-top:10px;
+}
+
